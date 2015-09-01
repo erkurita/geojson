@@ -24,12 +24,37 @@ class MultiPoint extends Geometry implements GeoJSONSerializable
     }
 
     /**
-     * @param float $latitude
-     * @param float $longitude
+     * @param array[]|Point $points
+     *
+     * @throws \geojson\exceptions\InvalidCoordinateFormatException
      */
-    public function addPoint($latitude, $longitude)
+    public function addPoints(array $points)
     {
-        $this->coordinates[] = [$longitude, $latitude];
+        foreach ($points as $point) {
+            $this->addPoint($point);
+        }
+    }
+
+
+    /**
+     * @param array|Point $coordinate An array structured as [longitude, latitude] or a Point
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function addPoint($coordinate)
+    {
+        if ($coordinate instanceof Point) {
+            $coordinate = $coordinate->getCoordinates();
+        } elseif (!is_array($coordinate)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The coordinate passed (type: %s) is not a valid type, must be either an array or a Point instance',
+                    gettype($coordinate)
+                )
+            );
+        }
+
+        $this->coordinates[] = $coordinate;
     }
 
     /**

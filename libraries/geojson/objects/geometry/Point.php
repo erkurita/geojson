@@ -16,13 +16,13 @@ class Point extends Geometry implements GeoJSONSerializable
     private $longitude;
 
     /**
-     * @param float $latitude
      * @param float $longitude
+     * @param float $latitude
      */
-    public function __construct($latitude, $longitude)
+    public function __construct($longitude, $latitude)
     {
-        $this->latitude = (float)$latitude;
         $this->longitude = (float)$longitude;
+        $this->latitude = (float)$latitude;
 
         $this->setType(GeoJsonObject::TYPE_POINT);
     }

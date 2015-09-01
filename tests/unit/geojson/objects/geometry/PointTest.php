@@ -11,18 +11,18 @@ class PointTest extends \PHPUnit_Framework_TestCase
 {
     public function testBasicPoint()
     {
-        $sut = new Point(10.5, 13.5);
+        $sut = new Point(13.5, 10.5);
 
-        $this->assertEquals($this->generateGeoJSON(10.5, 13.5), $sut->toGeoJSON());
+        $this->assertEquals($this->generateGeoJSON(13.5, 10.5), $sut->toGeoJSON());
     }
 
     /**
-     * @param $latitude
-     * @param $longitude
+     * @param float $longitude
+     * @param float $latitude
      *
      * @return array
      */
-    private function generateGeoJSON($latitude, $longitude)
+    private function generateGeoJSON($longitude, $latitude)
     {
         return [
             'type' => 'Point',

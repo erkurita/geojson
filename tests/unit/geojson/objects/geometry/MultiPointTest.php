@@ -3,6 +3,7 @@
 namespace unit_tests\geojson\objects\geometry;
 
 use geojson\objects\geometry\MultiPoint;
+use geojson\objects\geometry\Point;
 
 
 /**
@@ -11,21 +12,51 @@ use geojson\objects\geometry\MultiPoint;
  */
 class MultiPointTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSimpleMultiPoint()
+    public function testSimpleMultiPointWithArrays()
     {
         $sut = new MultiPoint();
-        $sut->addPoint(10.3, 13.5);
-        $sut->addPoint(11.3, 14.5);
-        $sut->addPoint(12.3, 15.5);
+        $sut->addPoint([13.5, 10.3]);
+        $sut->addPoint([14.5, 11.3]);
+        $sut->addPoint([15.5, 12.3]);
 
         $coordinates = [[13.5, 10.3], [14.5, 11.3], [15.5, 12.3]];
 
         $this->assertEquals($this->generateGeoJSON($coordinates), $sut->toGeoJSON());
     }
 
+    public function testSimpleMultiPointWithPoints()
+    {
+        $sut = new MultiPoint();
+        $sut->addPoint(new Point(13.5, 10.3));
+        $sut->addPoint(new Point(14.5, 11.3));
+        $sut->addPoint(new Point(15.5, 12.3));
+
+        $coordinates = [[13.5, 10.3], [14.5, 11.3], [15.5, 12.3]];
+
+        $this->assertEquals($this->generateGeoJSON($coordinates), $sut->toGeoJSON());
+    }
+
+    public function testSimpleMultiPoinsMixed()
+    {
+        $sut = new MultiPoint();
+        $sut->addPoints([new Point(13.5, 10.3), [14.5, 11.3]]);
+
+        $coordinates = [[13.5, 10.3], [14.5, 11.3]];
+
+        $this->assertEquals($this->generateGeoJSON($coordinates), $sut->toGeoJSON());
+    }
+
     /**
-     * @param $latitude
-     * @param $longitude
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidPoints()
+    {
+        $sut = new MultiPoint();
+        $sut->addPoint(13.5, 13.5);
+    }
+
+    /**
+     * @param array $coordinates
      *
      * @return array
      */
