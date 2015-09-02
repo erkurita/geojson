@@ -24,9 +24,9 @@ class MultiPointTest extends \PHPUnit_Framework_TestCase
     public function testSimpleMultiPointWithPoints()
     {
         $sut = new MultiPoint();
-        $sut->add([new Point(13.5, 10.3), new Point(14.5, 11.3), new Point(15.5, 12.3)]);
+        $sut->add([new Point(24.5, 20.3), new Point(25.5, 21.3), new Point(26.5, 22.3)]);
 
-        $coordinates = [[13.5, 10.3], [14.5, 11.3], [15.5, 12.3]];
+        $coordinates = [[24.5, 20.3], [25.5, 21.3], [26.5, 22.3]];
 
         $this->assertEquals($this->generateGeoJSON($coordinates), $sut->toGeoJSON());
     }
@@ -34,9 +34,9 @@ class MultiPointTest extends \PHPUnit_Framework_TestCase
     public function testSimpleMultiPoinsMixed()
     {
         $sut = new MultiPoint();
-        $sut->add([new Point(13.5, 10.3), [14.5, 11.3]]);
+        $sut->add([new Point(33.5, 10.3), [34.5, 31.3]]);
 
-        $coordinates = [[13.5, 10.3], [14.5, 11.3]];
+        $coordinates = [[33.5, 30.3], [34.5, 31.3]];
 
         $this->assertEquals($this->generateGeoJSON($coordinates), $sut->toGeoJSON());
     }
@@ -47,7 +47,7 @@ class MultiPointTest extends \PHPUnit_Framework_TestCase
     public function testInvalidPoints()
     {
         $sut = new MultiPoint();
-        $sut->add([13.5, 13.5]);
+        $sut->add([43.5, 43.5]);
     }
 
     /**
