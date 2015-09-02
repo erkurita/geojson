@@ -11,26 +11,6 @@ use geojson\objects\geometry\Point;
  */
 class MultiPointTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSimpleMultiPointWithArrays()
-    {
-        $sut = new MultiPoint();
-        $sut->add([[13.5, 10.3], [14.5, 11.3], [15.5, 12.3]]);
-
-        $coordinates = [[13.5, 10.3], [14.5, 11.3], [15.5, 12.3]];
-
-        $this->assertEquals($this->generateGeoJSON($coordinates), $sut->toGeoJSON());
-    }
-
-    public function testSimpleMultiPointWithPoints()
-    {
-        $sut = new MultiPoint();
-        $sut->add([new Point(24.5, 20.3), new Point(25.5, 21.3), new Point(26.5, 22.3)]);
-
-        $coordinates = [[24.5, 20.3], [25.5, 21.3], [26.5, 22.3]];
-
-        $this->assertEquals($this->generateGeoJSON($coordinates), $sut->toGeoJSON());
-    }
-
     public function testSimpleMultiPoinsMixed()
     {
         $sut = new MultiPoint();
