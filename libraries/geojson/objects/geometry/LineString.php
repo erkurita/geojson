@@ -5,6 +5,7 @@ namespace geojson\objects\geometry;
 use geojson\interfaces\GeoJsonObject;
 use geojson\objects\Geometry;
 use geojson\traits\PointBag;
+use geojson\traits\PointUtils;
 
 
 /**
@@ -14,6 +15,7 @@ use geojson\traits\PointBag;
 class LineString extends Geometry
 {
     use PointBag;
+    use PointUtils;
 
     /**
      * @param Point|array $pointA
@@ -47,6 +49,6 @@ class LineString extends Geometry
      */
     public function getCoordinates()
     {
-        return $this->coordinates;
+        return $this->all();
     }
 }

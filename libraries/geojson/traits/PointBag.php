@@ -46,17 +46,6 @@ trait PointBag
     }
 
     /**
-     * @param Point|array $pointA
-     * @param Point|array $pointB
-     *
-     * @return bool
-     */
-    public function equal($pointA, $pointB)
-    {
-        return $pointA === $pointB;
-    }
-
-    /**
      * @param array[]|Point[] $points
      *
      * @throws \InvalidArgumentException
