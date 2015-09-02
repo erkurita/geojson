@@ -42,12 +42,18 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected_coordinates, $sut->getCoordinates());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedCode \geojson\objects\geometry\Polygon::INVALID_ARGUMENT_CODE
-     */
     public function testInvalidLinearRingAdditionArgument()
     {
+        if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+            $this->setExpectedException('\TypeError');
+        } else {
+            $this->setExpectedException(
+                '\InvalidArgumentException',
+                '',
+                Polygon::INVALID_ARGUMENT_CODE
+            );
+        }
+
         $sut = new Polygon();
         $sut->add('test');
     }

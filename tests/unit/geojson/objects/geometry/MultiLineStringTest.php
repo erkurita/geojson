@@ -40,11 +40,14 @@ class MultiLineStringTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected_coordinates, $sut->getCoordinates());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testInvalidMultiLineAddition()
     {
+        if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+            $this->setExpectedException('\TypeError');
+        } else {
+            $this->setExpectedException('\InvalidArgumentException');
+        }
+
         $sut = new MultiLineString();
         $sut->add('test');
     }
