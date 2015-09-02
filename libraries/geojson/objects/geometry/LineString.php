@@ -30,7 +30,7 @@ class LineString extends Geometry
 
     public function close()
     {
-        $this->addPoint($this->first());
+        $this->add([$this->first()]);
     }
 
     /**
