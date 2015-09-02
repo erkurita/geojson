@@ -2,4 +2,4 @@
 /vendor/
 coverage
 composer.lock
-
+build/logs
