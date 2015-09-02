@@ -42,7 +42,7 @@ class MultiLineStringTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidMultiLineAddition()
     {
-        if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+        if (version_compare(PHP_VERSION, '6', '>')) {
             $this->setExpectedException('\TypeError');
         } else {
             $this->setExpectedException('\InvalidArgumentException');
