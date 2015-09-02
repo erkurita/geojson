@@ -34,7 +34,7 @@ class MultiPointTest extends \PHPUnit_Framework_TestCase
     public function testSimpleMultiPoinsMixed()
     {
         $sut = new MultiPoint();
-        $sut->add([new Point(33.5, 10.3), [34.5, 31.3]]);
+        $sut->add([new Point(33.5, 30.3), [34.5, 31.3]]);
 
         $coordinates = [[33.5, 30.3], [34.5, 31.3]];
 
