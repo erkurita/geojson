@@ -5,7 +5,7 @@ namespace geojson\objects\geometry;
 use geojson\interfaces\GeoJsonObject;
 use geojson\interfaces\GeoJSONSerializable;
 use geojson\objects\Geometry;
-use geojson\traits\PointBag;
+use geojson\traits\GeometricBag;
 
 /**
  * Class MultiPoint
@@ -13,7 +13,7 @@ use geojson\traits\PointBag;
  */
 class MultiPoint extends Geometry implements GeoJSONSerializable
 {
-    use PointBag;
+    use GeometricBag;
 
     /**
      *

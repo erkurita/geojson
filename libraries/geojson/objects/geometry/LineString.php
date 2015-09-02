@@ -4,7 +4,7 @@ namespace geojson\objects\geometry;
 
 use geojson\interfaces\GeoJsonObject;
 use geojson\objects\Geometry;
-use geojson\traits\PointBag;
+use geojson\traits\GeometricBag;
 use geojson\traits\PointUtils;
 
 
@@ -14,7 +14,7 @@ use geojson\traits\PointUtils;
  */
 class LineString extends Geometry
 {
-    use PointBag;
+    use GeometricBag;
     use PointUtils;
 
     /**
@@ -23,7 +23,7 @@ class LineString extends Geometry
      */
     public function __construct($pointA, $pointB)
     {
-        $this->addPoints([$pointA, $pointB]);
+        $this->add([$pointA, $pointB]);
 
         $this->setType(GeoJsonObject::TYPE_LINESTRING);
     }

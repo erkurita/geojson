@@ -26,7 +26,7 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
     public function testLineIsNotALinearRing($basePoints, $additionalPoints = [])
     {
         $sut = new LineString($basePoints[0], $basePoints[1]);
-        $sut->addPoints($additionalPoints);
+        $sut->add($additionalPoints);
 
         $this->assertFalse($sut->isLinearRing());
     }
@@ -34,7 +34,7 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
     public function testLineIsALinearRing()
     {
         $sut = new LineString(new Point(13.9, 10.3), [14.2, 15]);
-        $sut->addPoints([[15.2, 12], [35.2, 12], new Point(13.9, 10.3)]);
+        $sut->add([[15.2, 12], [35.2, 12], new Point(13.9, 10.3)]);
 
         $this->assertTrue($sut->isLinearRing());
     }
@@ -42,7 +42,7 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
     public function testLineIsALinearRingWhenClosed()
     {
         $sut = new LineString(new Point(13.9, 10.3), [14.2, 15]);
-        $sut->addPoints([[15.2, 12], [35.2, 12]]);
+        $sut->add([[15.2, 12], [35.2, 12]]);
 
         $this->assertFalse(
             $sut->isLinearRing(),

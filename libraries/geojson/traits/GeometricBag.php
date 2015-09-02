@@ -3,13 +3,14 @@
 namespace geojson\traits;
 
 use geojson\objects\geometry\Point;
+use geojson\objects\Geometry;
 
 
 /**
  * Class PointBag
  * @package geojson\traits
  */
-trait PointBag
+trait GeometricBag
 {
     private $coordinates = [];
 
@@ -46,11 +47,11 @@ trait PointBag
     }
 
     /**
-     * @param array[]|Point[] $points
+     * @param array[]|Geometry[] $points
      *
      * @throws \InvalidArgumentException
      */
-    public function addPoints(array $points)
+    public function add(array $points)
     {
         foreach ($points as $point) {
             $this->addPoint($point);
@@ -59,13 +60,13 @@ trait PointBag
 
 
     /**
-     * @param array|Point $coordinate An array structured as [longitude, latitude] or a Point
+     * @param array|Geometry $coordinate An array structured as [longitude, latitude] or a Point
      *
      * @throws \InvalidArgumentException
      */
-    public function addPoint($coordinate)
+    private function addPoint($coordinate)
     {
-        if ($coordinate instanceof Point) {
+        if ($coordinate instanceof Geometry) {
             $coordinate = $coordinate->getCoordinates();
         } elseif (!is_array($coordinate)) {
             throw new \InvalidArgumentException(
