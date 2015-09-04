@@ -32,7 +32,8 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
     public function testLinearRingAddition()
     {
         $lineString = new LineString(new Point(1, 2), new Point(2, 3));
-        $lineString->add([new Point(3, 4), new Point(4, 1), new Point(1, 2)]);
+        $lineString->add([new Point(3, 4), new Point(4, 1)]);
+        $lineString->close();
 
         $sut = new Polygon();
         $sut->add($lineString);

@@ -31,15 +31,8 @@ class MultiPolygonTest extends \PHPUnit_Framework_TestCase
 
     public function testPolygonAddition()
     {
-        $polygon1 = new Polygon();
-
-        $lineString1 = $this->generateNewLinearRing();
-        $polygon1->add($lineString1);
-
-        $polygon2 = new Polygon();
-
-        $lineString2 = $this->generateNewLinearRing();
-        $polygon2->add($lineString2);
+        $polygon1 = $this->generatePolygon();
+        $polygon2 = $this->generatePolygon();
 
         $sut = new MultiPolygon();
 
@@ -61,6 +54,19 @@ class MultiPolygonTest extends \PHPUnit_Framework_TestCase
 
         $sut = new MultiPolygon();
         $sut->add('test');
+    }
+
+    /**
+     * @return Polygon
+     */
+    private function generatePolygon()
+    {
+        $polygon = new Polygon();
+
+        $lineString = $this->generateNewLinearRing();
+        $polygon->add($lineString);
+
+        return $polygon;
     }
 
     /**
