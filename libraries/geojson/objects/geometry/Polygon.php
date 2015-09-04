@@ -19,6 +19,14 @@ class Polygon extends Geometry
     const NON_LINEARRING_CODE = 2;
 
     /**
+     *
+     */
+    public function __construct()
+    {
+        $this->setType(self::TYPE_POLYGON);
+    }
+
+    /**
      * @param LineString $lineString
      *
      * @throws \InvalidArgumentException

@@ -1,14 +1,16 @@
 <?php
+
 namespace geojson\objects\geometry;
 
 use geojson\objects\Geometry;
 use geojson\traits\GeometricBag;
 
+
 /**
- * Class MultiLineString
+ * Class MultiPolygon
  * @package geojson\objects\geometry
  */
-class MultiLineString extends Geometry
+class MultiPolygon extends Geometry
 {
     use GeometricBag {
         add as addGeometry;
@@ -19,21 +21,21 @@ class MultiLineString extends Geometry
      */
     public function __construct()
     {
-        $this->setType(self::TYPE_MULTILINESTRING);
+        $this->setType(self::TYPE_MULTIPOLYGON);
     }
 
     /**
-     * @param LineString $lineString
+     * @param Polygon $polygon
      *
      * @throws \InvalidArgumentException
      */
-    public function add(LineString $lineString)
+    public function add(Polygon $polygon)
     {
-        if (!($lineString instanceof LineString)) {
-            throw new \InvalidArgumentException('Only LineString objects may be added to a MultiLineString');
+        if (!($polygon instanceof Polygon)) {
+            throw new \InvalidArgumentException('Only Polygon objects may be added to a MultiPolygon');
         }
 
-        $this->addGeometry([$lineString]);
+        $this->addGeometry([$polygon]);
     }
 
     /**
