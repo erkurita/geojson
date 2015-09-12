@@ -3,3 +3,4 @@
 coverage
 composer.lock
 build/logs
+libraries/profiler/

@@ -1,28 +1,30 @@
 {
-	"name"              : "erkurita/geojson",
-	"description"       : "GeoJSON implementation in PHP",
-	"license"           : "GPL-3.0",
-	"autoload"          : {
+	"name"         : "erkurita/geojson",
+	"description"  : "GeoJSON implementation in PHP",
+	"license"      : "GPL-3.0",
+	"autoload"     : {
 		"psr-4" : {
 			"geojson\\" : "libraries/geojson"
 		}
 	},
-	"autoload-dev"      : {
+	"autoload-dev" : {
 		"psr-4" : {
 			"unit_tests\\geojson\\" : "tests/unit/geojson"
 		}
 	},
-	"authors"           : [
+	"authors"      : [
 		{
 			"name"  : "Alejandro Carrilo",
 			"email" : "j.alec.n@gmail.com"
 		}
 	],
-	"minimum-stability" : "stable",
+	"minimum-stability" : "dev",
+	"prefer-stable"     : true,
 	"require"           : {
 	},
 	"require-dev"       : {
 		"phpunit/phpunit"               : "4.8.*",
-		"codeclimate/php-test-reporter" : "dev-master"
+		"codeclimate/php-test-reporter" : "dev-master",
+		"perftools/xhgui"               : "*"
 	}
 }
