@@ -20,11 +20,13 @@ class FeatureTest extends \PHPUnit_Framework_TestCase
         $point = new Point(8.7, 6.9);
 
         $this->sut->set($point);
+        $this->sut->addProperty('test', 'value');
     }
 
     public function testEmptyFeature()
     {
         $sut = new Feature();
+        $sut->remove('test');
 
         $expected_json = <<<END
 {"type":"Feature","properties":{},"geometry":null}
@@ -35,6 +37,7 @@ END;
 
     public function testGeometryWithNoProperties()
     {
+        $this->sut->remove('test');
         $expected_json = <<<END
 {"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[8.7,6.9]}}
 END;
@@ -44,7 +47,6 @@ END;
 
     public function testGeometryWithProperties()
     {
-        $this->sut->addProperty('test', 'value');
 
         $expected_json = <<<END
 {"type":"Feature","properties":{"test":"value"},"geometry":{"type":"Point","coordinates":[8.7,6.9]}}
