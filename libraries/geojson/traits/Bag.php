@@ -18,7 +18,8 @@ trait Bag
      */
     public function count()
     {
-        return count($this->getContainer());
+        $container = $this->getContainer();
+        return count($container);
     }
 
     /**
@@ -26,7 +27,8 @@ trait Bag
      */
     public function first()
     {
-        return reset($this->getContainer());
+        $container = $this->getContainer();
+        return reset($container);
     }
 
     /**
@@ -34,7 +36,8 @@ trait Bag
      */
     public function last()
     {
-        return end($this->getContainer());
+        $container = $this->getContainer();
+        return end($container);
     }
 
     /**
