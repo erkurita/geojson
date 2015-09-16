@@ -19,39 +19,41 @@ class FeatureTest extends \PHPUnit_Framework_TestCase
 
         $point = new Point(8.7, 6.9);
 
-        $this->sut->set($point);
+        $this->sut->setGeometry($point);
         $this->sut->addProperty('test', 'value');
     }
 
     public function testEmptyFeature()
     {
         $sut = new Feature();
-        $sut->remove('test');
+        $sut->removeProperty('test');
 
-        $expected_json = <<<END
-{"type":"Feature","properties":{},"geometry":null}
+        $expectedJson = <<<END
+{"type":"Feature","geometry":null,"properties":{}}
 END;
 
-        $this->assertEquals($expected_json, json_encode($sut->toGeoJSON()));
+        $this->assertEquals($expectedJson, json_encode($sut->toGeoJSON()));
     }
 
     public function testGeometryWithNoProperties()
     {
-        $this->sut->remove('test');
-        $expected_json = <<<END
-{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[8.7,6.9]}}
+        $this->sut->removeProperty('test');
+        $expectedJson = <<<END
+{"type":"Feature","geometry":{"type":"Point","coordinates":[8.7,6.9]},"properties":{}}
 END;
 
-        $this->assertEquals($expected_json, json_encode($this->sut->toGeoJSON()));
+        $this->assertEquals($expectedJson, json_encode($this->sut->toGeoJSON()));
     }
 
-    public function testGeometryWithProperties()
+    public function testGeometryWithPropertiesAndId()
     {
+        $this->sut->setFeatureId('test');
+        $this->sut->setProperties(['testb' => 'testa']);
 
-        $expected_json = <<<END
-{"type":"Feature","properties":{"test":"value"},"geometry":{"type":"Point","coordinates":[8.7,6.9]}}
+        $expectedJson = <<<END
+{"type":"Feature","geometry":{"type":"Point","coordinates":[8.7,6.9]},"properties":{"testb":"testa"},"id":"test"}
 END;
 
-        $this->assertEquals($expected_json, json_encode($this->sut->toGeoJSON()));
+        $this->assertEquals($expectedJson, json_encode($this->sut->toGeoJSON()));
     }
 }
