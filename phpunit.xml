@@ -28,7 +28,7 @@
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./libraries/geojson</directory>
+            <directory suffix=".php">./libraries</directory>
             <exclude>
                 <directory>./tests</directory>
                 <directory>./vendor</directory>
