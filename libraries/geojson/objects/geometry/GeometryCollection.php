@@ -16,6 +16,14 @@ class GeometryCollection extends Geometry
     }
 
     /**
+     *
+     */
+    public function __construct()
+    {
+        $this->setType(self::TYPE_GEOMETRYCOLLECTION);
+    }
+
+    /**
      * @param Geometry $geometric_obj
      */
     public function add(Geometry $geometric_obj)

@@ -1,10 +1,7 @@
 <?php
-
 namespace geojson\traits;
 
-use geojson\objects\geometry\Point;
 use geojson\objects\Geometry;
-
 
 /**
  * Class PointBag
@@ -12,55 +9,32 @@ use geojson\objects\Geometry;
  */
 trait GeometricBag
 {
-    private $coordinates = [];
+    use Bag;
+
+    private $container = [];
 
     /**
-     * @return int
+     * @return Geometry[]|array[]
      */
-    public function count()
+    public function getContainer()
     {
-        return count($this->coordinates);
+        return $this->container;
     }
 
     /**
-     * @return Point|array
-     */
-    public function first()
-    {
-        return reset($this->coordinates);
-    }
-
-    /**
-     * @return Point|array
-     */
-    public function last()
-    {
-        return end($this->coordinates);
-    }
-
-    /**
-     * @return Point[]|array[]
-     */
-    public function all()
-    {
-        return $this->coordinates;
-    }
-
-    /**
-     * @param array[]|Geometry[] $points
+     * @param array[]|Geometry[] $objects
      *
      * @throws \InvalidArgumentException
      */
-    public function add(array $points)
+    public function add(array $objects)
     {
-        foreach ($points as $point) {
-            $this->addPoint($point);
+        foreach ($objects as $object) {
+            $this->addPoint($object);
         }
     }
 
-
     /**
-     * @param array|Geometry $coordinate An array structured as [longitude, latitude] or a Point
+     * @param array|Geometry $coordinate A geometry
      *
      * @throws \InvalidArgumentException
      */
@@ -71,12 +45,12 @@ trait GeometricBag
         } elseif (!is_array($coordinate)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'The coordinate passed (type: %s) is not a valid type, must be either an array or a Point instance',
+                    'The coordinate passed (type: %s) is not a valid type, must be either an array or a Geometry instance',
                     gettype($coordinate)
                 )
             );
         }
 
-        $this->coordinates[] = $coordinate;
+        $this->container[] = $coordinate;
     }
 }

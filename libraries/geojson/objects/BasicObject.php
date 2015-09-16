@@ -15,21 +15,7 @@ abstract class BasicObject implements GeoJsonObject, GeoJSONSerializable
     private $type = null;
 
     /**
-     * The value of the type member must be one of:
-     *   - Point
-     *   - MultiPoint
-     *   - LineString
-     *   - MultiLineString
-     *   - Polygon
-     *   - MultiPolygon
-     *   - GeometryCollection
-     *   - Feature
-     *   - FeatureCollection
-     *
-     * The case of the type member values must be as shown here.
-     *
-     * @see http://geojson.org/geojson-spec.html#geojson-objects
-     * @return string
+     * @inheritdoc
      */
     public function getType()
     {
@@ -61,7 +47,23 @@ abstract class BasicObject implements GeoJsonObject, GeoJSONSerializable
      *
      * @return bool
      */
-    abstract protected function isValidType($type);
+    protected function isValidType($type)
+    {
+        return in_array(
+            $type,
+            [
+                self::TYPE_POINT,
+                self::TYPE_MULTIPOINT,
+                self::TYPE_LINESTRING,
+                self::TYPE_MULTILINESTRING,
+                self::TYPE_POLYGON,
+                self::TYPE_MULTIPOLYGON,
+                self::TYPE_GEOMETRYCOLLECTION,
+                self::TYPE_FEATURE,
+                self::TYPE_FEATURECOLLECTION,
+            ]
+        );
+    }
 
     /**
      * @inheritdoc
