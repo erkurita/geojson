@@ -31,14 +31,4 @@ class GeometryCollection extends Geometry
 
         $this->addGeometry([$geometricObj]);
     }
-
-    /**
-     * Returns an array of coordinates
-     *
-     * @return array
-     */
-    public function getCoordinates()
-    {
-        return $this->all();
-    }
 }

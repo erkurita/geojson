@@ -19,14 +19,4 @@ class MultiPoint extends Geometry implements GeoJSONSerializable
     {
         $this->setType(GeoJsonObject::TYPE_MULTIPOINT);
     }
-
-    /**
-     * Returns an array of coordinates
-     *
-     * @return array
-     */
-    public function getCoordinates()
-    {
-        return $this->all();
-    }
 }

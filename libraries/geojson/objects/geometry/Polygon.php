@@ -45,14 +45,4 @@ class Polygon extends Geometry
 
         $this->addGeometry([$lineString]);
     }
-
-    /**
-     * Returns an array of coordinates
-     *
-     * @return array
-     */
-    public function getCoordinates()
-    {
-        return $this->all();
-    }
 }

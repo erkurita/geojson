@@ -57,5 +57,8 @@ abstract class Geometry extends BasicObject
      *
      * @return array
      */
-    abstract public function getCoordinates();
+    public function getCoordinates()
+    {
+        return $this->all();
+    }
 }

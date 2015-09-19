@@ -32,14 +32,4 @@ class MultiPolygon extends Geometry
 
         $this->addGeometry([$polygon]);
     }
-
-    /**
-     * Returns an array of coordinates
-     *
-     * @return array
-     */
-    public function getCoordinates()
-    {
-        return $this->all();
-    }
 }
