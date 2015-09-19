@@ -9,6 +9,7 @@ use geojson\objects\Geometry;
  */
 class GeometryCollection extends Geometry
 {
+
     /**
      *
      */
@@ -18,11 +19,17 @@ class GeometryCollection extends Geometry
     }
 
     /**
-     * @param Geometry $geometric_obj
+     * @param Geometry $geometricObj
+     *
+     * @throws \InvalidArgumentException
      */
-    public function add(Geometry $geometric_obj)
+    public function add(Geometry $geometricObj)
     {
-        $this->addGeometry([$geometric_obj]);
+        if (!($geometricObj instanceof Geometry)) {
+            throw new \InvalidArgumentException('Only Geometry objects may be added to a GeometryCollection');
+        }
+
+        $this->addGeometry([$geometricObj]);
     }
 
     /**
