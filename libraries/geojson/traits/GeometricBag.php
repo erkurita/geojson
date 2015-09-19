@@ -49,7 +49,7 @@ trait GeometricBag
      *
      * @throws \InvalidArgumentException
      */
-    public function add(array $objects)
+    public function addGeometry(array $objects)
     {
         foreach ($objects as $object) {
             $this->addPoint($object);

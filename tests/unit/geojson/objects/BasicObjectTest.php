@@ -10,7 +10,7 @@ use geojson\objects\BasicObject;
  * Class BasicObjectTest
  * @package unit_tests\geojson\objects
  */
-class BasicObjectTest extends \PHPUnit_Framework_TestCase
+class BasicObjectTest extends \tests\AbstractTest
 {
     /**
      * @var BasicObjectTestImplementation

@@ -10,7 +10,7 @@ use tests\helpers\GeometricUtils;
  *
  * @package unit_tests\geojson\objects\geometry
  */
-class LineStringTest extends \PHPUnit_Framework_TestCase
+class LineStringTest extends \tests\AbstractTest
 {
     use GeometricUtils;
 
@@ -21,6 +21,9 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
         $coordinates = [[13.9, 10.3], [14.2, 15]];
 
         $this->assertEquals($coordinates, $sut->getCoordinates());
+
+        /** GeoJson Interface */
+        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 
     /**
@@ -82,15 +85,47 @@ class LineStringTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGeoJsonInterface()
+    /**
+     * @dataProvider equalPointsDataProvider
+     */
+    public function testEqual($pointA, $pointB)
     {
-        $point1 = $this->generatePoint();
-        $point2 = $this->generatePoint();
-        $sut = new LineString($point1, $point2);
+        $this->assertTrue(LineString::equal($pointA, $pointB));
+    }
 
-        $coordinates = [$point1->getCoordinates(), $point2->getCoordinates()];
+    /**
+     * @dataProvider notEqualPointsDataProvider
+     */
+    public function testNotEqual($pointA, $pointB)
+    {
+        $this->assertFalse(LineString::equal($pointA, $pointB));
+    }
 
-        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
+    public function testIntegerCoordinatesAreProcessedProperly()
+    {
+        $this->assertTrue(LineString::equal([1, 2], new Point(1, 2)));
+    }
+
+    /**
+     * @return array
+     */
+    public function equalPointsDataProvider()
+    {
+        return [
+            [new Point(3.3, 4.4), [3.3, 4.4]],
+            [[5.5, 6.6], new Point(5.5, 6.6)],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function notEqualPointsDataProvider()
+    {
+        return [
+            [[17.18, 19.20], new Point(21.22, 23.24)],
+            [new Point(9.10, 11.12), [13.14, 15.16]],
+        ];
     }
 
     /**

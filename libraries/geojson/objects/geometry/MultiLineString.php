@@ -2,7 +2,6 @@
 namespace geojson\objects\geometry;
 
 use geojson\objects\Geometry;
-use geojson\traits\GeometricBag;
 
 /**
  * Class MultiLineString
@@ -10,9 +9,6 @@ use geojson\traits\GeometricBag;
  */
 class MultiLineString extends Geometry
 {
-    use GeometricBag {
-        add as addGeometry;
-    }
 
     /**
      *

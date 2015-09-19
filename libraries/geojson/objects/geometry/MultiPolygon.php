@@ -3,8 +3,6 @@
 namespace geojson\objects\geometry;
 
 use geojson\objects\Geometry;
-use geojson\traits\GeometricBag;
-
 
 /**
  * Class MultiPolygon
@@ -12,9 +10,6 @@ use geojson\traits\GeometricBag;
  */
 class MultiPolygon extends Geometry
 {
-    use GeometricBag {
-        add as addGeometry;
-    }
 
     /**
      *

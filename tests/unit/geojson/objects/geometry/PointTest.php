@@ -9,7 +9,7 @@ use geojson\objects\geometry\Point;
  *
  * @package unit_tests\geojson\objects\geometry
  */
-class PointTest extends \PHPUnit_Framework_TestCase
+class PointTest extends \tests\AbstractTest
 {
     public function testBasicPoint()
     {
@@ -27,7 +27,7 @@ class PointTest extends \PHPUnit_Framework_TestCase
     private function generateGeoJSON($longitude, $latitude)
     {
         return [
-            'type' => 'Point',
+            'type'        => 'Point',
             'coordinates' => [$longitude, $latitude]
         ];
     }

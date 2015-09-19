@@ -2,16 +2,13 @@
 namespace unit_tests\geojson\objects\geometry;
 
 use geojson\objects\geometry\MultiPolygon;
-use tests\helpers\GeometricUtils;
 
 /**
  * Class MultiPolygonTest
  * @package unit_tests\geojson\objects\geometry
  */
-class MultiPolygonTest extends \PHPUnit_Framework_TestCase
+class MultiPolygonTest extends \tests\AbstractTest
 {
-    use GeometricUtils;
-
     public function setUp()
     {
         /**
@@ -42,6 +39,9 @@ class MultiPolygonTest extends \PHPUnit_Framework_TestCase
         $expectedCoordinates = [$polygon1->getCoordinates(), $polygon2->getCoordinates()];
 
         $this->assertEquals($expectedCoordinates, $sut->getCoordinates());
+
+        /** GeoJson Interface */
+        $this->assertEquals(json_encode($this->generateGeoJSON($expectedCoordinates)), json_encode($sut));
     }
 
     public function testInvalidMultiLineAddition()
@@ -54,21 +54,6 @@ class MultiPolygonTest extends \PHPUnit_Framework_TestCase
 
         $sut = new MultiPolygon();
         $sut->add('test');
-    }
-
-    public function testGeoJsonInterface()
-    {
-        $polygon1 = $this->generatePolygon();
-        $polygon2 = $this->generatePolygon();
-
-        $sut = new MultiPolygon();
-
-        $sut->add($polygon1);
-        $sut->add($polygon2);
-
-        $coordinates = [$polygon1->getCoordinates(), $polygon2->getCoordinates()];
-
-        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 
     /**

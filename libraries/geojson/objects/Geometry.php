@@ -1,6 +1,8 @@
 <?php
 namespace geojson\objects;
 
+use geojson\traits\GeometricBag;
+
 /**
  * Class Geometry
  *
@@ -8,6 +10,8 @@ namespace geojson\objects;
  */
 abstract class Geometry extends BasicObject
 {
+    use GeometricBag;
+
     /**
      * @inheritdoc
      */
@@ -25,6 +29,16 @@ abstract class Geometry extends BasicObject
                 self::TYPE_GEOMETRYCOLLECTION
             ]
         );
+    }
+
+    /**
+     * @param array[]|Geometry[] $objects
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function add($objects)
+    {
+        $this->addGeometry($objects);
     }
 
     /**

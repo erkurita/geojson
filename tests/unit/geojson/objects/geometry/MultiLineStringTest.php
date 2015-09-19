@@ -4,16 +4,14 @@ namespace unit_tests\geojson\objects\geometry;
 use geojson\objects\geometry\LineString;
 use geojson\objects\geometry\MultiLineString;
 use geojson\objects\geometry\Point;
-use tests\helpers\GeometricUtils;
 
 /**
  * Class MultiLineStringTest
+ *
  * @package unit_tests\geojson\objects\geometry
  */
-class MultiLineStringTest extends \PHPUnit_Framework_TestCase
+class MultiLineStringTest extends \tests\AbstractTest
 {
-    use GeometricUtils;
-
     public function setUp()
     {
         /**
@@ -38,9 +36,12 @@ class MultiLineStringTest extends \PHPUnit_Framework_TestCase
         $sut = new MultiLineString();
         $sut->add($lineString);
 
-        $expected_coordinates = [[[1, 2], [2, 3]]];
+        $expectedCoordinates = [[[1, 2], [2, 3]]];
 
-        $this->assertEquals($expected_coordinates, $sut->getCoordinates());
+        $this->assertEquals($expectedCoordinates, $sut->getCoordinates());
+
+        /** GeoJson Interface */
+        $this->assertEquals(json_encode($this->generateGeoJSON($expectedCoordinates)), json_encode($sut));
     }
 
     public function testInvalidMultiLineAddition()
@@ -53,19 +54,6 @@ class MultiLineStringTest extends \PHPUnit_Framework_TestCase
 
         $sut = new MultiLineString();
         $sut->add('test');
-    }
-
-    public function testGeoJsonInterface()
-    {
-        $lineString1 = $this->generateLineString();
-        $lineString2 = $this->generateLineString(3);
-        $sut    = new MultiLineString();
-        $sut->add($lineString1);
-        $sut->add($lineString2);
-
-        $coordinates = [$lineString1->getCoordinates(), $lineString2->getCoordinates()];
-
-        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 
     /**

@@ -11,10 +11,6 @@ use geojson\traits\GeometricBag;
  */
 class Polygon extends Geometry
 {
-    use GeometricBag {
-       add as addGeometry;
-    }
-
     const INVALID_ARGUMENT_CODE = 1;
     const NON_LINEARRING_CODE = 2;
 

@@ -2,17 +2,14 @@
 namespace unit_tests\geojson\objects\geometry;
 
 use geojson\objects\geometry\GeometryCollection;
-use tests\helpers\GeometricUtils;
 
 /**
  * Class GeometryCollectionTest
  *
  * @package unit_tests\geojson\objects\geometry
  */
-class GeometryCollectionTest extends \PHPUnit_Framework_TestCase
+class GeometryCollectionTest extends \tests\AbstractTest
 {
-    use GeometricUtils;
-
     public function testAddingGeometricObjects()
     {
         $sut = new GeometryCollection();
@@ -23,19 +20,11 @@ class GeometryCollectionTest extends \PHPUnit_Framework_TestCase
         $polygon = $this->generatePolygon();
         $sut->add($polygon);
 
-        $this->assertEquals([$point->getCoordinates(), $polygon->getCoordinates()], $sut->getCoordinates());
-    }
+        $coordinates = [$point->getCoordinates(), $polygon->getCoordinates()];
 
-    public function testGeoJsonInterface()
-    {
-        $lineString = $this->generateLineString();
-        $linearRing = $this->generateLinearRing();
-        $sut    = new GeometryCollection();
-        $sut->add($lineString);
-        $sut->add($linearRing);
+        $this->assertEquals($coordinates, $sut->getCoordinates());
 
-        $coordinates = [$lineString->getCoordinates(), $linearRing->getCoordinates()];
-
+        /** GeoJson Interface */
         $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 

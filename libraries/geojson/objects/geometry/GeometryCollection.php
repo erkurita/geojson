@@ -2,8 +2,6 @@
 namespace geojson\objects\geometry;
 
 use geojson\objects\Geometry;
-use geojson\traits\GeometricBag;
-
 
 /**
  * Class GeometryCollection
@@ -11,10 +9,6 @@ use geojson\traits\GeometricBag;
  */
 class GeometryCollection extends Geometry
 {
-    use GeometricBag {
-        add as addGeometry;
-    }
-
     /**
      *
      */

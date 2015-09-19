@@ -10,7 +10,7 @@ use geojson\objects\geometry\Point;
  *
  * @package unit_tests\geojson\objects\geometry
  */
-class MultiPointTest extends \PHPUnit_Framework_TestCase
+class MultiPointTest extends \tests\AbstractTest
 {
     /**
      * @expectedException \InvalidArgumentException
@@ -28,6 +28,7 @@ class MultiPointTest extends \PHPUnit_Framework_TestCase
 
         $coordinates = [[33.5, 30.3], [34.5, 31.3]];
 
+        /** GeoJson Interface */
         $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 

@@ -10,7 +10,7 @@ use geojson\objects\geometry\Point;
  *
  * @package unit_tests\geojson\objects
  */
-class FeatureCollectionTest extends \PHPUnit_Framework_TestCase
+class FeatureCollectionTest extends \tests\AbstractTest
 {
     /** @var FeatureCollection */
     private $sut;

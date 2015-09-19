@@ -5,17 +5,14 @@ namespace unit_tests\geojson\objects\geometry;
 use geojson\objects\geometry\LineString;
 use geojson\objects\geometry\Point;
 use geojson\objects\geometry\Polygon;
-use tests\helpers\GeometricUtils;
 
 /**
  * Class PolygonTest
  *
  * @package unit_tests\geojson\objects\geometry
  */
-class PolygonTest extends \PHPUnit_Framework_TestCase
+class PolygonTest extends \tests\AbstractTest
 {
-    use GeometricUtils;
-
     public function setUp()
     {
         /**
@@ -43,6 +40,7 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
         $expected_coordinates = [$linearRing->getCoordinates()];
 
         $this->assertEquals($expected_coordinates, $sut->getCoordinates());
+        $this->assertEquals(json_encode($this->generateGeoJSON($expected_coordinates)), json_encode($sut));
     }
 
     public function testInvalidLinearRingAdditionArgument()
@@ -71,18 +69,6 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
 
         $sut = new Polygon();
         $sut->add($lineString);
-    }
-
-    public function testGeoJsonInterface()
-    {
-        $linearRing = $this->generateLinearRing();
-
-        $sut = new Polygon();
-        $sut->add($linearRing);
-
-        $coordinates = [$linearRing->getCoordinates()];
-
-        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 
     /**
