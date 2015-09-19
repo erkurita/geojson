@@ -24,7 +24,7 @@ class MultiPolygon extends Geometry
      *
      * @throws \InvalidArgumentException
      */
-    public function add(Polygon $polygon)
+    public function add($polygon)
     {
         if (!($polygon instanceof Polygon)) {
             throw new \InvalidArgumentException('Only Polygon objects may be added to a MultiPolygon');

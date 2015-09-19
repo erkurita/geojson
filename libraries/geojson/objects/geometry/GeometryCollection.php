@@ -23,7 +23,7 @@ class GeometryCollection extends Geometry
      *
      * @throws \InvalidArgumentException
      */
-    public function add(Geometry $geometricObj)
+    public function add($geometricObj)
     {
         if (!($geometricObj instanceof Geometry)) {
             throw new \InvalidArgumentException('Only Geometry objects may be added to a GeometryCollection');

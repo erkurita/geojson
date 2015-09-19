@@ -23,7 +23,7 @@ class MultiLineString extends Geometry
      *
      * @throws \InvalidArgumentException
      */
-    public function add(LineString $lineString)
+    public function add($lineString)
     {
         if (!($lineString instanceof LineString)) {
             throw new \InvalidArgumentException('Only LineString objects may be added to a MultiLineString');

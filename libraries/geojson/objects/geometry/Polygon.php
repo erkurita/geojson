@@ -27,7 +27,7 @@ class Polygon extends Geometry
      *
      * @throws \InvalidArgumentException
      */
-    public function add(LineString $lineString)
+    public function add($lineString)
     {
         if (!($lineString instanceof LineString)) {
             throw new \InvalidArgumentException(
@@ -38,7 +38,7 @@ class Polygon extends Geometry
 
         if (!$lineString->isLinearRing()) {
             throw new \InvalidArgumentException(
-                'The LineString instance passed is not a LinearRing (4 points, first and last must be equal)',
+                'The LineString instance passed is not a LinearRing (at least 4 points, first and last must be equal)',
                 self::NON_LINEARRING_CODE
             );
         }
