@@ -13,23 +13,6 @@ use geojson\objects\geometry\Polygon;
  */
 class PolygonTest extends \tests\AbstractTest
 {
-    public function setUp()
-    {
-        /**
-         * We need this in order to bypass PHPUnit's handler and test for the real exception
-         */
-        set_error_handler(
-            function () {
-                return true;
-            }
-        );
-    }
-
-    public function tearDown()
-    {
-        restore_error_handler();
-    }
-
     public function testLinearRingAddition()
     {
         $linearRing = $this->generateLinearRing();
@@ -43,18 +26,11 @@ class PolygonTest extends \tests\AbstractTest
         $this->assertEquals(json_encode($this->generateGeoJSON($expected_coordinates)), json_encode($sut));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testInvalidLinearRingAdditionArgument()
     {
-        if (version_compare(PHP_VERSION, '6', '>')) {
-            $this->setExpectedException('\TypeError');
-        } else {
-            $this->setExpectedException(
-                '\InvalidArgumentException',
-                '',
-                Polygon::INVALID_ARGUMENT_CODE
-            );
-        }
-
         $sut = new Polygon();
         $sut->add('test');
     }

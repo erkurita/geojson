@@ -12,23 +12,6 @@ use geojson\objects\geometry\Point;
  */
 class MultiLineStringTest extends \tests\AbstractTest
 {
-    public function setUp()
-    {
-        /**
-         * We need this in order to bypass PHPUnit's handler and test for the real exception
-         */
-        set_error_handler(
-            function () {
-                return true;
-            }
-        );
-    }
-
-    public function tearDown()
-    {
-        restore_error_handler();
-    }
-
     public function testMultiLineAddition()
     {
         $lineString = new LineString(new Point(1, 2), new Point(2, 3));
@@ -44,14 +27,11 @@ class MultiLineStringTest extends \tests\AbstractTest
         $this->assertEquals(json_encode($this->generateGeoJSON($expectedCoordinates)), json_encode($sut));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testInvalidMultiLineAddition()
     {
-        if (version_compare(PHP_VERSION, '6', '>')) {
-            $this->setExpectedException('\TypeError');
-        } else {
-            $this->setExpectedException('\InvalidArgumentException');
-        }
-
         $sut = new MultiLineString();
         $sut->add('test');
     }

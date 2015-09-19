@@ -44,14 +44,11 @@ class MultiPolygonTest extends \tests\AbstractTest
         $this->assertEquals(json_encode($this->generateGeoJSON($expectedCoordinates)), json_encode($sut));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testInvalidMultiLineAddition()
     {
-        if (version_compare(PHP_VERSION, '6', '>')) {
-            $this->setExpectedException('\TypeError');
-        } else {
-            $this->setExpectedException('\InvalidArgumentException');
-        }
-
         $sut = new MultiPolygon();
         $sut->add('test');
     }
