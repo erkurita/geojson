@@ -29,6 +29,16 @@ class GeometryCollectionTest extends \tests\AbstractTest
     }
 
     /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidGeometryAddition()
+    {
+        $sut = new GeometryCollection();
+        $sut->add('test');
+    }
+
+
+    /**
      * @param array $coordinates
      *
      * @return array
