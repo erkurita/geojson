@@ -30,9 +30,9 @@ abstract class Geometry extends BasicObject
     /**
      * @inheritdoc
      */
-    public function toGeoJSON()
+    public function toGeoArray()
     {
-        $result = parent::toGeoJSON();
+        $result = parent::toGeoArray();
         $result['coordinates'] = $this->getCoordinates();
 
         return $result;

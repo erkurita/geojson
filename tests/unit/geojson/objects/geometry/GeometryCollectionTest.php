@@ -2,65 +2,53 @@
 namespace unit_tests\geojson\objects\geometry;
 
 use geojson\objects\geometry\GeometryCollection;
-use geojson\objects\geometry\LineString;
-use geojson\objects\geometry\Point;
-use geojson\objects\geometry\Polygon;
+use tests\helpers\GeometricUtils;
 
 /**
  * Class GeometryCollectionTest
+ *
  * @package unit_tests\geojson\objects\geometry
  */
 class GeometryCollectionTest extends \PHPUnit_Framework_TestCase
 {
+    use GeometricUtils;
+
     public function testAddingGeometricObjects()
     {
         $sut = new GeometryCollection();
 
-        $point = new Point(12.3, 4.56);
+        $point = $this->generatePoint();
         $sut->add($point);
 
         $polygon = $this->generatePolygon();
-
         $sut->add($polygon);
 
         $this->assertEquals([$point->getCoordinates(), $polygon->getCoordinates()], $sut->getCoordinates());
     }
 
-    /**
-     * @return Polygon
-     */
-    private function generatePolygon()
+    public function testGeoJsonInterface()
     {
-        $polygon = new Polygon();
+        $lineString = $this->generateLineString();
+        $linearRing = $this->generateLinearRing();
+        $sut    = new GeometryCollection();
+        $sut->add($lineString);
+        $sut->add($linearRing);
 
-        $lineString = $this->generateNewLinearRing();
-        $polygon->add($lineString);
+        $coordinates = [$lineString->getCoordinates(), $linearRing->getCoordinates()];
 
-        return $polygon;
+        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 
     /**
-     * @return LineString
+     * @param array $coordinates
+     *
+     * @return array
      */
-    private function generateNewLinearRing()
+    private function generateGeoJSON(array $coordinates)
     {
-        $lineString = new LineString(
-            $this->generateNewPoint(),
-            $this->generateNewPoint()
-        );
-
-        $lineString->add([$this->generateNewPoint()]);
-
-        $lineString->close();
-
-        return $lineString;
-    }
-
-    /**
-     * @return Point
-     */
-    private function generateNewPoint()
-    {
-        return new Point(rand(0, 20), rand(0, 20));
+        return [
+            'type'        => 'GeometryCollection',
+            'coordinates' => $coordinates
+        ];
     }
 }

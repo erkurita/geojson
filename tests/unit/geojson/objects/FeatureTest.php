@@ -6,6 +6,7 @@ use geojson\objects\geometry\Point;
 
 /**
  * Class FeatureTest
+ *
  * @package unit_tests\geojson\objects
  */
 class FeatureTest extends \PHPUnit_Framework_TestCase
@@ -32,7 +33,7 @@ class FeatureTest extends \PHPUnit_Framework_TestCase
 {"type":"Feature","geometry":null,"properties":{}}
 END;
 
-        $this->assertEquals($expectedJson, json_encode($sut->toGeoJSON()));
+        $this->assertEquals($expectedJson, json_encode($sut));
     }
 
     public function testGeometryWithNoProperties()
@@ -42,7 +43,7 @@ END;
 {"type":"Feature","geometry":{"type":"Point","coordinates":[8.7,6.9]},"properties":{}}
 END;
 
-        $this->assertEquals($expectedJson, json_encode($this->sut->toGeoJSON()));
+        $this->assertEquals($expectedJson, json_encode($this->sut));
     }
 
     public function testGeometryWithPropertiesAndId()
@@ -54,6 +55,6 @@ END;
 {"type":"Feature","geometry":{"type":"Point","coordinates":[8.7,6.9]},"properties":{"testb":"testa"},"id":"test"}
 END;
 
-        $this->assertEquals($expectedJson, json_encode($this->sut->toGeoJSON()));
+        $this->assertEquals($expectedJson, json_encode($this->sut));
     }
 }

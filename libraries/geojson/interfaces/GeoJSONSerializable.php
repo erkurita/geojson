@@ -4,12 +4,12 @@ namespace geojson\interfaces;
 /**
  * Interface GeoJSONSerializable
  */
-interface GeoJSONSerializable
+interface GeoJSONSerializable extends \JsonSerializable
 {
     /**
      * Returns a JSON-serializable array
      *
      * @return array
      */
-    public function toGeoJSON();
+    public function toGeoArray();
 }

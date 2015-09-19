@@ -21,9 +21,9 @@ class FeatureCollection extends BasicObject
     /**
      * @inheritdoc
      */
-    public function toGeoJSON()
+    public function toGeoArray()
     {
-        $result = parent::toGeoJSON();
+        $result = parent::toGeoArray();
 
         $result['features'] = $this->featuresToGeoJson();
 
@@ -46,7 +46,7 @@ class FeatureCollection extends BasicObject
         $result = [];
 
         foreach ($this->features as $feature) {
-            $result[] = $feature->toGeoJSON();
+            $result[] = $feature->toGeoArray();
         }
 
         return $result;

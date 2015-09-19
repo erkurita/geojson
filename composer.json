@@ -9,6 +9,7 @@
 	},
 	"autoload-dev" : {
 		"psr-4" : {
+			"tests\\helpers\\"      : "tests/helpers",
 			"unit_tests\\geojson\\" : "tests/unit/geojson"
 		}
 	},
@@ -20,8 +21,7 @@
 	],
 	"minimum-stability" : "dev",
 	"prefer-stable"     : true,
-	"require"           : {
-	},
+	"require"           : {},
 	"require-dev"       : {
 		"phpunit/phpunit"               : "4.8.*",
 		"codeclimate/php-test-reporter" : "dev-master"

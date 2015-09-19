@@ -26,9 +26,9 @@ class Feature extends BasicObject
     /**
      * @inheritdoc
      */
-    public function toGeoJSON()
+    public function toGeoArray()
     {
-        $result = parent::toGeoJSON();
+        $result = parent::toGeoArray();
 
         $properties = $this->getProperties();
         if (empty($properties)) {
@@ -132,7 +132,7 @@ class Feature extends BasicObject
         $geometry = $this->getGeometry();
 
         if ($geometry instanceof Geometry) {
-            return $geometry->toGeoJSON();
+            return $geometry->toGeoArray();
         }
 
         return null;

@@ -68,8 +68,16 @@ abstract class BasicObject implements GeoJsonObject, GeoJSONSerializable
     /**
      * @inheritdoc
      */
-    public function toGeoJSON()
+    public function toGeoArray()
     {
         return ['type' => $this->getType()];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function jsonSerialize()
+    {
+        return $this->toGeoArray();
     }
 }

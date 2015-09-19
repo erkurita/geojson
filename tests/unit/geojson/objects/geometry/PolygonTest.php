@@ -5,13 +5,17 @@ namespace unit_tests\geojson\objects\geometry;
 use geojson\objects\geometry\LineString;
 use geojson\objects\geometry\Point;
 use geojson\objects\geometry\Polygon;
+use tests\helpers\GeometricUtils;
 
 /**
  * Class PolygonTest
+ *
  * @package unit_tests\geojson\objects\geometry
  */
 class PolygonTest extends \PHPUnit_Framework_TestCase
 {
+    use GeometricUtils;
+
     public function setUp()
     {
         /**
@@ -31,14 +35,12 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
 
     public function testLinearRingAddition()
     {
-        $lineString = new LineString(new Point(1, 2), new Point(2, 3));
-        $lineString->add([new Point(3, 4), new Point(4, 1)]);
-        $lineString->close();
+        $linearRing = $this->generateLinearRing();
 
         $sut = new Polygon();
-        $sut->add($lineString);
+        $sut->add($linearRing);
 
-        $expected_coordinates = [[[1, 2], [2, 3], [3, 4], [4, 1], [1, 2]]];
+        $expected_coordinates = [$linearRing->getCoordinates()];
 
         $this->assertEquals($expected_coordinates, $sut->getCoordinates());
     }
@@ -69,5 +71,30 @@ class PolygonTest extends \PHPUnit_Framework_TestCase
 
         $sut = new Polygon();
         $sut->add($lineString);
+    }
+
+    public function testGeoJsonInterface()
+    {
+        $linearRing = $this->generateLinearRing();
+
+        $sut = new Polygon();
+        $sut->add($linearRing);
+
+        $coordinates = [$linearRing->getCoordinates()];
+
+        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
+    }
+
+    /**
+     * @param array $coordinates
+     *
+     * @return array
+     */
+    private function generateGeoJSON(array $coordinates)
+    {
+        return [
+            'type'        => 'Polygon',
+            'coordinates' => $coordinates
+        ];
     }
 }

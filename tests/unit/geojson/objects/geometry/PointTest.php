@@ -6,6 +6,8 @@ use geojson\objects\geometry\Point;
 
 /**
  * Class PointTest
+ *
+ * @package unit_tests\geojson\objects\geometry
  */
 class PointTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +15,7 @@ class PointTest extends \PHPUnit_Framework_TestCase
     {
         $sut = new Point(13.5, 10.5);
 
-        $this->assertEquals($this->generateGeoJSON(13.5, 10.5), $sut->toGeoJSON());
+        $this->assertEquals(json_encode($this->generateGeoJSON(13.5, 10.5)), json_encode($sut));
     }
 
     /**

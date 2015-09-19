@@ -1,10 +1,8 @@
 <?php
 namespace unit_tests\geojson\objects\geometry;
 
-use geojson\objects\geometry\LineString;
 use geojson\objects\geometry\MultiPolygon;
-use geojson\objects\geometry\Point;
-use geojson\objects\geometry\Polygon;
+use tests\helpers\GeometricUtils;
 
 /**
  * Class MultiPolygonTest
@@ -12,6 +10,8 @@ use geojson\objects\geometry\Polygon;
  */
 class MultiPolygonTest extends \PHPUnit_Framework_TestCase
 {
+    use GeometricUtils;
+
     public function setUp()
     {
         /**
@@ -56,41 +56,31 @@ class MultiPolygonTest extends \PHPUnit_Framework_TestCase
         $sut->add('test');
     }
 
-    /**
-     * @return Polygon
-     */
-    private function generatePolygon()
+    public function testGeoJsonInterface()
     {
-        $polygon = new Polygon();
+        $polygon1 = $this->generatePolygon();
+        $polygon2 = $this->generatePolygon();
 
-        $lineString = $this->generateNewLinearRing();
-        $polygon->add($lineString);
+        $sut = new MultiPolygon();
 
-        return $polygon;
+        $sut->add($polygon1);
+        $sut->add($polygon2);
+
+        $coordinates = [$polygon1->getCoordinates(), $polygon2->getCoordinates()];
+
+        $this->assertEquals(json_encode($this->generateGeoJSON($coordinates)), json_encode($sut));
     }
 
     /**
-     * @return LineString
+     * @param array $coordinates
+     *
+     * @return array
      */
-    private function generateNewLinearRing()
+    private function generateGeoJSON(array $coordinates)
     {
-        $lineString = new LineString(
-            $this->generateNewPoint(),
-            $this->generateNewPoint()
-        );
-
-        $lineString->add([$this->generateNewPoint()]);
-
-        $lineString->close();
-
-        return $lineString;
-    }
-
-    /**
-     * @return Point
-     */
-    private function generateNewPoint()
-    {
-        return new Point(rand(0, 20), rand(0, 20));
+        return [
+            'type'        => 'MultiPolygon',
+            'coordinates' => $coordinates
+        ];
     }
 }

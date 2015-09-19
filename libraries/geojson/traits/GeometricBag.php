@@ -9,14 +9,37 @@ use geojson\objects\Geometry;
  */
 trait GeometricBag
 {
-    use Bag;
-
     private $container = [];
 
     /**
-     * @return Geometry[]|array[]
+     * @return int
      */
-    public function getContainer()
+    public function count()
+    {
+        return count($this->container);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function first()
+    {
+
+        return reset($this->container);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function last()
+    {
+        return end($this->container);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function all()
     {
         return $this->container;
     }
